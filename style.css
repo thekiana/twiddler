@@ -1,0 +1,64 @@
+
+body {
+  background-image: url("jake.jpeg");
+  background-repeat: repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: 200px 250px;
+}
+
+.btn-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.btn:hover {
+  background-color: palevioletred;
+}
+
+.btn {
+  display: inline-block;
+  justify-content: center;
+  margin: 10px;
+  border: 8px solid #000000;
+  border-radius: 50px;
+  padding: 20px 30px;
+  font-size: 25px;
+  font-family: Palatino;
+}
+
+.tweet-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-radius: 50px;
+  margin: 0 auto;
+  width: 500px;
+  background-color: #000000;
+  overflow: hidden;
+}
+
+.tweet {
+  display: block;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 5px;
+  height: auto;
+  width: 400px;
+  padding: 30px;
+  background-color: white;
+  border-radius: 15px;
+  font-size: 20px;
+  font-family: Palatino;
+}
+
+.handle{
+  font-weight: bold;
+}
+
+.handle:hover {
+  opacity: 0.5;
+  text-decoration: underline;
+}

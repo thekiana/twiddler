@@ -3,25 +3,98 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
+
+    <div class="btn-container">
+      <button class="btn new-tweets">get them tweets <i class="fa fa-refresh"></i></button>
+    </div>
+    <div class="tweet-container"></div>
     <script>
 
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+        // $body.html('');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
+        var userTweets = function(handle){
+          var $tweetContainer = $('.tweet-container');
+          $tweetContainer.html('');
 
+          var index = 0;
+          while(index < streams.users[handle].length){
+            var tweet = streams.users[handle][index];
+            var $tweet = $('<div class = "tweet"></div>');
+            var $handle = $('<div class = "handle"</div>');
+            var $timeStamp = $('<div class = "time-stamp"</div>')
+            var date = new Date();
+            var options = {
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric'
+            };
+            var currentTime = new Intl.DateTimeFormat('en-US', options).format(date);
+            // var timeToSeconds = Math.floor(Date.now() / 1000);
+
+            $handle.text('@' + tweet.user);
+            $handle.on('click', function(event){
+              var tweeter = this.textContent.slice(1);
+              userTweets(tweeter);
+            });
+
+            $tweet.text(tweet.message)
+            $timeStamp.text(currentTime);
+            $handle.prependTo($tweet);
+            $timeStamp.appendTo($tweet);
+            $tweet.prependTo('.tweet-container');
+            index++;
+          }
+        };
+
+        $(".new-tweets").on('click', function(){
+          var $tweetContainer = $('.tweet-container');
+          $tweetContainer.html('');
+          var index = 0;
+          while(index < streams.home.length){
+            var tweet = streams.home[index];
+            var $tweet = $('<div class = "tweet"></div>');
+            var $handle = $('<div class = "handle"</div>');
+            var $timeStamp = $('<div class = "time-stamp"</div>');
+            var date = new Date();
+            var options = {
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric'
+            };
+            var currentTime = new Intl.DateTimeFormat('en-US', options).format(date)
+            // var timeToSeconds = Math.floor(Date.now() / 1000);
+
+            $handle.text('@' + tweet.user);
+
+            $handle.on('click', function(event){
+              var tweeter = this.textContent.slice(1);
+              userTweets(tweeter);
+            });
+
+            $tweet.text(tweet.message);
+            $timeStamp.text(currentTime);
+            $handle.prependTo($tweet);
+            $timeStamp.appendTo($tweet);
+            $tweet.prependTo('.tweet-container');
+            index++;
+          }
+        });
       });
 
     </script>
+
   </body>
 </html>
